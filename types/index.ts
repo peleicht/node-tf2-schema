@@ -10,20 +10,6 @@ export interface StringEnum {
 	[key: string]: string;
 }
 
-export interface TF2Schema {
-	raw: RawSchema;
-	time: number; //timestamp
-	version: string;
-	getAttributeByDefindex: (def_index: number) => SchemaAttribute;
-	getEffectById: (id: number) => string;
-	getEffectidByName: (name: string) => number;
-	getItemByDefindex: (def_index: number) => SchemaItem;
-	getItemByItemName: (name: string) => SchemaItem;
-	getQualityById: (id: number) => string;
-	getQualityIdByName: (name: string) => number;
-	getSkinById: (id: number) => string;
-	getSkinIdByName: (name: string) => number;
-}
 export interface RawSchema {
 	items_game: any;
 	schema: {

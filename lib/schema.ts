@@ -5,7 +5,6 @@ import { webAPI } from "./webapi.js";
 const language = "English";
 
 export interface SchemaInput {
-	version: string;
 	raw: RawSchema;
 	time?: number;
 }
@@ -18,7 +17,6 @@ interface SchemaItemsResponse {
 }
 
 export default class Schema {
-	version: string;
 	raw: RawSchema;
 	time: number;
 
@@ -26,7 +24,6 @@ export default class Schema {
 	 * Initializes the Schema class
 	 */
 	constructor(data: SchemaInput) {
-		this.version = data.version;
 		this.raw = data.raw;
 		this.time = data.time || Date.now();
 	}
@@ -401,7 +398,6 @@ export default class Schema {
 	 */
 	toJSON(): object {
 		return {
-			version: this.version,
 			time: this.time,
 			raw: this.raw,
 		};

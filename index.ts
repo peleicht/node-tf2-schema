@@ -1,7 +1,4 @@
-import { major } from "semver";
 import { EventEmitter } from "events";
-
-import { version } from "./package.json";
 
 import Schema, { SchemaInput } from "./lib/schema.js";
 import { SchemaInitOptions } from "./types/index.js";
@@ -46,16 +43,9 @@ export default class SchemaManager extends EventEmitter {
 	}
 
 	/**
-	 * Sets the schema using known data. If the schema data does not contain a version, or the version does not satify our version, then the schema will be ignored
-	 * @param data Schema data
-	 * @param fromUpdate If the schema is new or not
+	 * Sets the schema using known data.
 	 */
-	setSchema(data: SchemaInput, fromUpdate: boolean) {
-		// Ignore the schema if it does not contain a version, or if the schema has a higher version (major)
-		if ((!data.version && !fromUpdate) || major(data.version) !== major(version)) {
-			return;
-		}
-
+	setSchema(data: SchemaInput) {
 		if (this.schema !== null) {
 			this.schema.raw = data.raw;
 			this.schema.time = data.time || new Date().getTime();
@@ -63,9 +53,7 @@ export default class SchemaManager extends EventEmitter {
 			this.schema = new Schema(data);
 		}
 
-		if (fromUpdate) {
-			this.emit("schema", this.schema);
-		}
+		this.emit("schema", this.schema);
 	}
 
 	/**
@@ -88,7 +76,7 @@ export default class SchemaManager extends EventEmitter {
 			items_game: items_game,
 		};
 
-		this.setSchema({ version: version, raw: raw }, true);
+		this.setSchema({ raw });
 	}
 
 	/**
