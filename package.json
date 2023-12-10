@@ -1,9 +1,9 @@
 {
-	"name": "tf2-schema",
+	"name": "@peleicht/tf2-schema",
 	"version": "2.0.0",
 	"description": "Modernized TF2 Schema to get information about items, effects, skins and more",
 	"type": "module",
-	"main": "index.js",
+	"main": "./dist/index.js",
 	"scripts": {
 		"build": "tsc"
 	},
