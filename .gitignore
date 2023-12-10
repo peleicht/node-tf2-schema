@@ -1,3 +1,9 @@
+*.js
+*.map
+dist
+*.code-workspace
+.vscode
+
 # Logs
 logs
 *.log
