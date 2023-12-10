@@ -117,5 +117,5 @@ export default class SchemaManager extends EventEmitter {
 	}
 }
 
-const _Schema = Schema;
-export { _Schema as Schema };
+export { Schema, SchemaInput };
+export { SchemaInitOptions, RawSchema, SchemaItem, SchemaAttribute, GetNameAttributes } from "./types/index.js";
