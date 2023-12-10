@@ -1,12 +1,11 @@
 {
 	"name": "@peleicht/tf2-schema",
-	"version": "2.0.2",
+	"version": "2.0.6",
 	"description": "Modernized TF2 Schema to get information about items, effects, skins and more",
 	"type": "module",
 	"main": "./dist/index.js",
 	"scripts": {
-		"build": "tsc",
-		"publish": "npm run build && npm publish"
+		"build": "tsc"
 	},
 	"repository": {
 		"type": "git",

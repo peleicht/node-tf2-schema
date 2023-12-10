@@ -9,11 +9,9 @@ export interface SchemaInput {
 	time?: number;
 }
 interface SchemaItemsResponse {
-	result: {
-		status: number;
-		items: SchemaItem[];
-		next: number;
-	};
+	status: number;
+	items: SchemaItem[];
+	next: number;
 }
 
 export default class Schema {
@@ -324,10 +322,10 @@ export default class Schema {
 		while (true) {
 			const res: SchemaItemsResponse = await webAPI(url, { qs });
 
-			items = items.concat(res.result.items);
-			if (res.result.next === null) return items;
+			items = items.concat(res.items);
+			if (res.next == undefined) return items;
 
-			next = res.result.next;
+			next = res.next;
 			qs.start = next;
 		}
 	}
