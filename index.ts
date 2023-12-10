@@ -44,8 +44,10 @@ export default class SchemaManager extends EventEmitter {
 
 	/**
 	 * Sets the schema using known data.
+	 * @param data The data to set the schema with
+	 * @param fromUpdate Whether this is from an update or not. If true emits "schema" event.
 	 */
-	setSchema(data: SchemaInput) {
+	setSchema(data: SchemaInput, fromUpdate: boolean) {
 		if (this.schema !== null) {
 			this.schema.raw = data.raw;
 			this.schema.time = data.time || new Date().getTime();
@@ -53,7 +55,9 @@ export default class SchemaManager extends EventEmitter {
 			this.schema = new Schema(data);
 		}
 
-		this.emit("schema", this.schema);
+		if (fromUpdate) {
+			this.emit("schema", this.schema);
+		}
 	}
 
 	/**
@@ -76,7 +80,7 @@ export default class SchemaManager extends EventEmitter {
 			items_game: items_game,
 		};
 
-		this.setSchema({ raw });
+		this.setSchema({ raw }, true);
 	}
 
 	/**
