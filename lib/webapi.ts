@@ -1,24 +1,12 @@
-import request from "request";
+import fetch from "node-fetch";
 
 export async function webAPI(url: string, options: any): Promise<any> {
-	return new Promise((res, rej) => {
-		request(
-			url,
-			{
-				...options,
-				gzip: true,
-				json: true,
-			},
-			(err, response, body) => {
-				if (err) {
-					rej(err);
-				}
+	const resp = await fetch(url, options);
 
-				const result = body.result || body;
-				delete result.status;
+	const body = (await resp.json()) as any;
 
-				res(result);
-			}
-		);
-	});
+	const result = body.result || body;
+	delete result.status;
+
+	return result;
 }
