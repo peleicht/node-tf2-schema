@@ -1,12 +1,21 @@
 import fetch from "node-fetch";
 
-export async function webAPI(url: string, options: any): Promise<any> {
-	const resp = await fetch(url, options);
+type QueryString = string[][] | Record<string, string> | URLSearchParams;
+export async function webAPI(url: string, query?: QueryString, parse_json = false): Promise<any> {
+	const resp = await fetch(url + "?" + new URLSearchParams(query));
 
-	const body = (await resp.json()) as any;
+	if (!resp.ok) {
+		throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+	}
 
-	const result = body.result || body;
-	delete result.status;
+	if (parse_json) {
+		const body = (await resp.json()) as any;
 
-	return result;
+		const result = body.result || body;
+		delete result.status;
+
+		return result;
+	} else {
+		return await resp.text();
+	}
 }

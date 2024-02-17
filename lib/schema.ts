@@ -302,7 +302,7 @@ export default class Schema {
 			language,
 		};
 
-		return webAPI(url, { qs });
+		return webAPI(url, qs, true);
 	}
 
 	/**
@@ -313,20 +313,20 @@ export default class Schema {
 		const qs = {
 			key: apiKey,
 			language,
-			start: 0,
+			start: "0",
 		};
 
 		let items: SchemaItem[] = [];
 		let next: number = 0;
 
 		while (true) {
-			const res: SchemaItemsResponse = await webAPI(url, { qs });
+			const res: SchemaItemsResponse = await webAPI(url, qs, true);
 
 			items = items.concat(res.items);
 			if (res.next == undefined) return items;
 
 			next = res.next;
-			qs.start = next;
+			qs.start = String(next);
 		}
 	}
 

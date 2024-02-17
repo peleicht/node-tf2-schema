@@ -51,9 +51,10 @@ export interface SchemaItem {
 	item_class: string; // e.g. "tf_weapon_bat"
 	item_type_name: string; // e.g. "Bat"
 	item_name: string; // e.g. "Bat", actual base name
+	item_description?: string;
 	proper_name: boolean;
 	item_slot: string; // e.g. "melee",
-	model_player: string;
+	model_player?: string;
 	item_quality: number;
 	image_inventory: string;
 	min_ilevel: number;
