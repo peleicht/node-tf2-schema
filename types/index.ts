@@ -54,6 +54,7 @@ export interface SchemaItem {
 	item_description?: string;
 	proper_name: boolean;
 	item_slot: string; // e.g. "melee",
+	item_set?: string; // can find corresponding set in items_game.item_sets
 	model_player?: string;
 	item_quality: number;
 	image_inventory: string;
