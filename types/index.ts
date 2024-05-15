@@ -18,6 +18,15 @@ export interface RawSchema {
 			name: string;
 		}[];
 		attributes: SchemaAttribute[];
+		item_levels: {
+			levels: {
+				level: number;
+				name: string;
+				required_score: number;
+			}[];
+			name: string;
+		}[];
+		item_sets: ItemSet[];
 		items: SchemaItem[];
 		items_game_url: string;
 		kill_eater_score_types: {
@@ -65,6 +74,17 @@ export interface SchemaItem {
 	craft_class: string; // e.g. "weapon"
 	craft_material_type: string; // e.g. "weapon"
 	used_by_classes: string[];
+}
+
+export interface ItemSet {
+	attributes: {
+		class: string;
+		name: string;
+		value: number;
+	};
+	item_set: string; // schema internal name
+	items: string[]; // item names including "The"
+	name: string; // display name
 }
 
 export interface TextureEffectAttribute {
