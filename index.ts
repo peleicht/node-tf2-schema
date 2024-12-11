@@ -94,16 +94,22 @@ export default class SchemaManager extends EventEmitter {
 		if (this._updateTimeout) clearTimeout(this._updateTimeout);
 		if (this._updateInterval) clearInterval(this._updateInterval);
 
-		this._updateTimeout = setTimeout(() => {
+		this._updateTimeout = setTimeout(async () => {
 			// Update the schema
 			try {
-				this.getSchema();
+				await this.getSchema();
 			} catch (err) {
 				this.emit("failed", err);
 			}
 
 			// Set update interval
-			this._updateInterval = setInterval(() => this.getSchema(), this.updateTime);
+			this._updateInterval = setInterval(async () => {
+				try {
+					await this.getSchema();
+				} catch (err) {
+					this.emit("failed", err);
+				}
+			}, this.updateTime);
 		}, this._updateWait());
 	}
 
